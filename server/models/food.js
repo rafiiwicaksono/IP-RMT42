@@ -10,15 +10,65 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Food.belongsTo(models.User)
     }
   }
   Food.init({
-    name: DataTypes.STRING,
-    imageUrl: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    calory: DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Name is Required`
+        }, notEmpty: {
+          msg: `Name is Required`
+        }
+      }
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Image URL is Required`
+        }, notEmpty: {
+          msg: `Image URL is Required`
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Price is Required`
+        }, notEmpty: {
+          msg: `Price is Required`
+        }
+      }
+    },
+    calory: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Calory is Required`
+        }, notEmpty: {
+          msg: `Calory is Required`
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `UserId is Required`
+        }, notEmpty: {
+          msg: `UserId is Required`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Food',
