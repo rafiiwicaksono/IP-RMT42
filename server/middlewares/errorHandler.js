@@ -21,6 +21,8 @@ function errorHandler(error, req, res, next) {
         res.status(401).json({ message: `Invalid email/password` })
     } else if (error.name === `FoodNotFound`) {
         res.status(404).json({ message: `food not found` })
+    } else if (error.name === `ProfileNotFound`) {
+        res.status(404).json({ message: `Profile not found` })
     } else {
         console.log(error)
         res.status(500).json({ message: `Internal Server Error` })

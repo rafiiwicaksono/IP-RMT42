@@ -1,3 +1,4 @@
+const { where } = require("sequelize")
 const {Profile} = require(`../models`)
 class ProfileController {
     static async getProfile(req, res, next) {
@@ -12,8 +13,13 @@ class ProfileController {
     static async editProfile(req, res, next) {
         try {
             const {fullName, address, phoneNumber} = req.body
-            let profile = await Profile.update({fullName, address, phoneNumber, UserId: req.user.id})
-            res.status(200).json(profile)
+            let editProfile = await Profile.update({fullName, address, phoneNumber}, {
+                where: {
+                    UserId: req.user.id
+                }
+            })
+            // console.log(editProfile)
+            res.status(200).json(editProfile)
         } catch (error) {
             next(error)
         }
