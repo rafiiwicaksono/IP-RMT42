@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Food.belongsTo(models.User)
+      Food.hasMany(models.Order)
     }
   }
   Food.init({
