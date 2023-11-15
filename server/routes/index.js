@@ -4,12 +4,13 @@ const errorHandler = require('../middlewares/errorHandler')
 const UserController = require('../controllers/UserController')
 const ProfileController = require('../controllers/ProfileController')
 const authentication = require('../middlewares/authentication')
+const FoodController = require('../controllers/FoodController')
 
 router.post(`/register`, UserController.createUser)
 router.post(`/login`, UserController.loginUser)
 
-router.get(`/pub/foods`)
-router.get(`/pub/foods/:id`)
+router.get(`/pub/foods`, FoodController.getFoods)
+
 
 router.use(authentication)
 router.get(`/profile`, ProfileController.getProfile)

@@ -18,7 +18,6 @@ class ProfileController {
                     UserId: req.user.id
                 }
             })
-            // console.log(editProfile)
             res.status(200).json(editProfile)
         } catch (error) {
             next(error)
