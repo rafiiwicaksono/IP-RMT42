@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Food)
       User.hasOne(models.Profile)
+      User.hasMany(models.Order)
     }
   }
   User.init({

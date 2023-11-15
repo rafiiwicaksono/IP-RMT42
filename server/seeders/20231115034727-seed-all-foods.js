@@ -1,6 +1,6 @@
 'use strict';
 const axios = require('axios');
-const apiKey = process.env.API_KEY
+const apiKey = process.env.API_KEY_SPOONACULAR
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -15,10 +15,11 @@ module.exports = {
         name: recipe.title,
         imageUrl: recipe.image,
         price: priceData.totalCost,
-        calory: recipe.calories
+        calory: recipe.calories,
+        UserId: 1
       };
     }));
-    res.status(200).json(recipes)
+    // res.status(200).json(recipes)
     await queryInterface.bulkInsert(`Foods`, recipes)
   },
 
