@@ -1,0 +1,91 @@
+/* Section  */
+.container-card {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightgrey;
+    gap: 70px;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.clear {
+    clear: both;
+}
+.container-page {
+    display: flex;
+    background-color: gray;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+/* Section  */
+.detail-post {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightblue;
+    justify-content: center;
+    width: 100%;
+
+}
+
+/* Section */
+.container-login {
+    margin: 0 500px;
+}
+
+/* Section  */
+
+/* Section  */
+.container-create {
+    margin: 0 500px;
+}
+
+/* Section  */
+.container-edit {
+    margin: 0 500px;
+}
+
+/* Section  */
+.container-upload-image {
+    margin: 0 500px;
+}
+
+/* Section  */
+.container-create-user {
+    margin: 0 500px;
+}
+
+/* register  */
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+    }
+    .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+
+    /*profile */
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #f6d365;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+        }
