@@ -1,4 +1,5 @@
 'use strict';
+require(`dotenv`).config()
 const axios = require('axios');
 const apiKey = process.env.API_KEY_SPOONACULAR
 /** @type {import('sequelize-cli').Migration} */
@@ -6,20 +7,22 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const numberOfRecipes = 20
     const offset = 0
+    console.log(apiKey)
     const response = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?apiKey=${apiKey}&minCalories=50&maxCalories=800&number=${numberOfRecipes}&offset=${offset}`);
     const recipes = await Promise.all(response.data.map(async (recipe) => {
       const priceResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipe.id}/priceBreakdownWidget.json?apiKey=${apiKey}`);
       const priceData = priceResponse.data;
       return {
-        id: recipe.id,
+        spoonacularId: recipe.id,
         name: recipe.title,
         imageUrl: recipe.image,
         price: priceData.totalCost,
         calory: recipe.calories,
-        UserId: 1
+        UserId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       };
     }));
-    // res.status(200).json(recipes)
     await queryInterface.bulkInsert(`Foods`, recipes)
   },
 

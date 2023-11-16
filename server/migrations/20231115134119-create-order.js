@@ -18,7 +18,7 @@ module.exports = {
       FoodId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Food",
+          model: "Foods",
           key: "id"
         }
       },
@@ -28,6 +28,9 @@ module.exports = {
           model: "Users",
           key: "id"
         }
+      },
+      statusPayment: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
