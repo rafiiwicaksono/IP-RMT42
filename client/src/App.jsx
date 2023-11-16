@@ -9,6 +9,7 @@ import { Register } from "./components/Register";
 import { Food } from "./components/Food";
 import { Profile } from "./components/Profile";
 import { EditProfile } from "./components/EditProfile";
+import { Payment } from "./components/Payment";
 
 const router = createBrowserRouter([
   {
@@ -103,17 +104,17 @@ const router = createBrowserRouter([
   //   path: "/admin/foods/:id",
   //   element: <AdminEditFood/>
   // },
-  // {
-  //   loader: () => {
-  //     const access_token = localStorage.getItem(`access_token`)
-  //     if(!access_token) {
-  //       throw redirect(`/login`)
-  //     }
-  //     return null
-  //   },
-  //   path: "/payment/stripe",
-  //   element: <Payment/>
-  // },
+  {
+    loader: () => {
+      const access_token = localStorage.getItem(`access_token`)
+      if(!access_token) {
+        throw redirect(`/login`)
+      }
+      return null
+    },
+    path: "/payment",
+    element: <Payment/>
+  },
 ]);
 
 function App() {
