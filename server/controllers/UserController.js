@@ -59,6 +59,7 @@ class UserController {
                     email: payload.email,
                     password: String(Math.random())
                 })
+                await Profile.create({ UserId: user.id })
             }
             const access_token = signToken({ id: user.id })
             res.status(200).json({ access_token, email: user.email })

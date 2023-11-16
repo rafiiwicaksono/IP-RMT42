@@ -4,9 +4,9 @@ const {Food} = require(`../models`)
 class PaymentController {
     static async getPaymentStripe(req, res, next) {
         try {
-            const { foodId, quantity } = req.body;
+            const { FoodId, quantity } = req.body;
 
-            const food = await Food.findByPk(foodId);
+            const food = await Food.findByPk(FoodId);
 
             if (!food) {
                 throw ({name: `FoodNotFound`}) 
