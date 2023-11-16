@@ -29,6 +29,9 @@ module.exports = {
           key: "id"
         }
       },
+      statusPayment: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

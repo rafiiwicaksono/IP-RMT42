@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
           msg: `UserId is Required`
         }
       }
+    },
+    statusPayment: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: `Payment Pending`
     }
   }, {
     sequelize,
