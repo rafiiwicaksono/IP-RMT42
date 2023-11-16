@@ -18,10 +18,10 @@ beforeAll(async () => {
     await User.create(user1)
 })
 
-describe.skip(`/login`, () => {
+describe.skip(`/google-login`, () => {
     test(`success login and get access_token (200)`, async () => {
         let {status, body} = await request(app)
-            .post(`/login`)
+            .post(`/google-login`)
             .send(user1)
         expect(status).toBe(200)
         expect(body).toBeInstanceOf(Object)
@@ -30,7 +30,7 @@ describe.skip(`/login`, () => {
 
     test(`email not fill (400)`, async () => {
         let {status, body} = await request(app)
-            .post(`/login`)
+            .post(`/google-login`)
             .send({
                 email: ``,
                 password: `halo123`
@@ -42,7 +42,7 @@ describe.skip(`/login`, () => {
 
     test(`password not fill (400)`, async () => {
         let {status, body} = await request(app)
-            .post(`/login`)
+            .post(`/google-login`)
             .send({
                 email: `user@gmail.com`,
                 password: ``
@@ -54,7 +54,7 @@ describe.skip(`/login`, () => {
 
     test(`invalid email (401)`, async () => {
         let {status, body} = await request(app)
-            .post(`/login`)
+            .post(`/google-login`)
             .send(user2)
         expect(status).toBe(401)
         expect(body).toBeInstanceOf(Object)
@@ -63,7 +63,7 @@ describe.skip(`/login`, () => {
 
     test(`invalid password (401)`, async () => {
         let {status, body} = await request(app)
-            .post(`/login`)
+            .post(`/google-login`)
             .send(user2)
         expect(status).toBe(401)
         expect(body).toBeInstanceOf(Object)

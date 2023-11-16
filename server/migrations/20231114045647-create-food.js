@@ -2,11 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Food', {
+    await queryInterface.createTable('Foods', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      spoonacularId: {
         type: Sequelize.INTEGER
       },
       name: {
@@ -39,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Food');
+    await queryInterface.dropTable('Foods');
   }
 };
