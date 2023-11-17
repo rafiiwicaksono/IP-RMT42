@@ -28,6 +28,9 @@ export const Navbar = () => {
                             <Link className="nav-link" to="/profile">Profile</Link>
                         </li>
                         <li className="nav-item">
+                            <Link className="nav-link" to="/foods/admin">Admin Access</Link>
+                        </li>
+                        <li className="nav-item">
                         <button className="btn btn-info btn-lg btn-block" type="button" onClick={handleLogout}>Logout</button>
                         </li>
                     </ul>
