@@ -28,7 +28,7 @@ class PaymentController {
                         product_data: {
                             name: food.name,
                         },
-                        unit_amount: food.price * 100,
+                        unit_amount: food.price * 1000,
                     },
                     quantity: quantity || 1
                 }],
