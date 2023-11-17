@@ -10,6 +10,10 @@ import { Food } from "./components/Food";
 import { Profile } from "./components/Profile";
 import { EditProfile } from "./components/EditProfile";
 import { Payment } from "./components/Payment";
+import { Success } from "./components/Success";
+import { AdminFood } from "./components/AdminFood";
+import { AdminAddFood } from "./components/AdminAddFood";
+import { AdminEditFood } from "./components/AdminEditFood";
 
 const router = createBrowserRouter([
   {
@@ -71,39 +75,39 @@ const router = createBrowserRouter([
     path: "/profile/edit",
     element: <EditProfile/>
   },
-  // {
-  //   loader: () => {
-  //     const access_token = localStorage.getItem(`access_token`)
-  //     if(!access_token) {
-  //       throw redirect(`/login`)
-  //     }
-  //     return null
-  //   },
-  //   path: "/admin/foods",
-  //   element: <AdminFood/>
-  // },
-  // {
-  //   loader: () => {
-  //     const access_token = localStorage.getItem(`access_token`)
-  //     if(!access_token) {
-  //       throw redirect(`/login`)
-  //     }
-  //     return null
-  //   },
-  //   path: "/admin/foods/create",
-  //   element: <AdminAddFood/>
-  // },
-  // {
-  //   loader: () => {
-  //     const access_token = localStorage.getItem(`access_token`)
-  //     if(!access_token) {
-  //       throw redirect(`/login`)
-  //     }
-  //     return null
-  //   },
-  //   path: "/admin/foods/:id",
-  //   element: <AdminEditFood/>
-  // },
+  {
+    loader: () => {
+      const access_token = localStorage.getItem(`access_token`)
+      if(!access_token) {
+        throw redirect(`/login`)
+      }
+      return null
+    },
+    path: "/foods/admin",
+    element: <AdminFood/>
+  },
+  {
+    loader: () => {
+      const access_token = localStorage.getItem(`access_token`)
+      if(!access_token) {
+        throw redirect(`/login`)
+      }
+      return null
+    },
+    path: "/foods/admin/create",
+    element: <AdminAddFood/>
+  },
+  {
+    loader: () => {
+      const access_token = localStorage.getItem(`access_token`)
+      if(!access_token) {
+        throw redirect(`/login`)
+      }
+      return null
+    },
+    path: "/foods/admin/:id",
+    element: <AdminEditFood/>
+  },
   {
     loader: () => {
       const access_token = localStorage.getItem(`access_token`)
@@ -114,6 +118,17 @@ const router = createBrowserRouter([
     },
     path: "/payment",
     element: <Payment/>
+  },
+  {
+    loader: () => {
+      const access_token = localStorage.getItem(`access_token`)
+      if(!access_token) {
+        throw redirect(`/login`)
+      }
+      return null
+    },
+    path: "/success",
+    element: <Success/>
   },
 ]);
 
