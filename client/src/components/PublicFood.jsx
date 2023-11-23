@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import { PubCard } from "./PubCard";
 
 export const PublicFood = () => {
-    const [pubPosts, setPubFoods] = useState([])
+    const [allFoods, setAllFoods] = useState([]);
     const [filteredFoods, setFilteredFoods] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [sortOrder, setSortOrder] = useState('asc')
-    const [currentPage, setCurrentPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
+    const [sortOrder, setSortOrder] = useState('asc');
     const [selectedCalories, setSelectedCalories] = useState([]);
+
     const caloriesOptions = [
         { id: 1, calory: { min: 0, max: 200 } },
         { id: 2, calory: { min: 201, max: 500 } },
         { id: 3, calory: { min: 501, max: 1000 } },
     ];
+
     const handleCheckboxChange = (e) => {
         const caloryId = parseInt(e.target.value);
         const selectedCalory = caloriesOptions.find((calory) => calory.id === caloryId);
@@ -26,22 +26,23 @@ export const PublicFood = () => {
             setSelectedCalories((prev) => prev.filter((item) => item.id !== caloryId));
         }
     };
-    const PAGE_SIZE = 5
-    async function fetchPubFoods() {
+
+    const fetchAllFoods = async () => {
         try {
             const response = await axios.get('http://localhost:3000/pub/foods');
-            setPubFoods(response.data);
+            setAllFoods(response.data);
+            setFilteredFoods(response.data);
         } catch (error) {
             console.error('Error:', error);
         }
-    }
+    };
 
     useEffect(() => {
-        fetchPubFoods()
+        fetchAllFoods();
     }, []);
 
     useEffect(() => {
-        let filteredData = pubPosts.filter((post) =>
+        let filteredData = allFoods.filter((post) =>
             post.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
@@ -59,32 +60,23 @@ export const PublicFood = () => {
             filteredData.sort((a, b) => b.name.localeCompare(a.name));
         }
 
-        const totalItems = filteredData.length
-        const totalPages = Math.ceil(totalItems / PAGE_SIZE)
-        setTotalPages(totalPages)
+        setFilteredFoods(filteredData);
 
-        const startIndex = (currentPage - 1) * PAGE_SIZE;
-        const endIndex = startIndex + PAGE_SIZE;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        setFilteredFoods(paginatedData);
+    }, [allFoods, searchTerm, sortOrder, selectedCalories]);
 
-    }, [pubPosts, searchTerm, sortOrder, currentPage, selectedCalories]);
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-    }
+    };
 
     const handleSortChange = (e) => {
         setSortOrder(e.target.value);
-    }
+    };
 
-    const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
-    }
     return (
         <section id="public-home">
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/pub/foods">Calory Choise</Link>
+                    <Link className="navbar-brand" to="/pub/foods">Calory Choice</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -148,32 +140,6 @@ export const PublicFood = () => {
                     <PubCard todo={todo} key={todo.id} />
                 ))}
             </div>
-
-            <div className="clear"></div>
-
-            <div className="container-page">
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" aria-label="Previous" onClick={() => handlePageChange(currentPage - 1)}>
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <li className={`page-item ${currentPage === index + 1 ? 'active' : ''}`} key={index + 1}>
-                                <a className="page-link" href="#" onClick={() => handlePageChange(index + 1)}>
-                                    {index + 1}
-                                </a>
-                            </li>
-                        ))}
-                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" aria-label="Next" onClick={() => handlePageChange(currentPage + 1)}>
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </section>
-    )
-}
+    );
+};
