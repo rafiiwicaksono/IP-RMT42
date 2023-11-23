@@ -9,9 +9,8 @@ export const Food = () => {
     const [filteredFoods, setFilteredFoods] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOrder, setSortOrder] = useState('asc')
-    const [currentPage, setCurrentPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
     const [selectedCalories, setSelectedCalories] = useState([]);
+
     const caloriesOptions = [
         { id: 1, calory: { min: 0, max: 200 } },
         { id: 2, calory: { min: 201, max: 500 } },
@@ -27,7 +26,7 @@ export const Food = () => {
             setSelectedCalories((prev) => prev.filter((item) => item.id !== caloryId));
         }
     };
-    const PAGE_SIZE = 5
+
     async function fetchPubFoods() {
         try {
             const access_token = localStorage.getItem(`access_token`)
@@ -66,16 +65,9 @@ export const Food = () => {
             filteredData.sort((a, b) => b.name.localeCompare(a.name));
         }
 
-        const totalItems = filteredData.length
-        const totalPages = Math.ceil(totalItems / PAGE_SIZE)
-        setTotalPages(totalPages)
+        setFilteredFoods(filteredData);
 
-        const startIndex = (currentPage - 1) * PAGE_SIZE;
-        const endIndex = startIndex + PAGE_SIZE;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        setFilteredFoods(paginatedData);
-
-    }, [pubPosts, searchTerm, sortOrder, currentPage, selectedCalories]);
+    }, [pubPosts, searchTerm, sortOrder, selectedCalories]);
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     }
@@ -84,9 +76,6 @@ export const Food = () => {
         setSortOrder(e.target.value);
     }
 
-    const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
-    }
     return (
         <div>
             <Navbar />
@@ -146,32 +135,6 @@ export const Food = () => {
                     {filteredFoods.map((todo) => (
                         <Card todo={todo} key={todo.id} />
                     ))}
-                </div>
-
-                <div className="clear"></div>
-
-                <div className="container-page">
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination">
-                            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                <a className="page-link" href="#" aria-label="Previous" onClick={() => handlePageChange(currentPage - 1)}>
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <li className={`page-item ${currentPage === index + 1 ? 'active' : ''}`} key={index + 1}>
-                                    <a className="page-link" href="#" onClick={() => handlePageChange(index + 1)}>
-                                        {index + 1}
-                                    </a>
-                                </li>
-                            ))}
-                            <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                <a className="page-link" href="#" aria-label="Next" onClick={() => handlePageChange(currentPage + 1)}>
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </section>
         </div>

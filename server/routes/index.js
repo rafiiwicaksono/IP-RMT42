@@ -21,6 +21,7 @@ router.put(`/profile`, ProfileController.editProfile)
 
 router.get(`/foods`, FoodController.getFoods)
 router.get(`/foods/admin`, guardAuthorizationAdmin, FoodController.getFoods)
+router.get(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.getFood)
 router.post(`/foods/admin`, guardAuthorizationAdmin, FoodController.createFood)
 router.put(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.editFood)
 router.delete(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.destroyFood)
