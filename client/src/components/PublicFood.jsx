@@ -10,6 +10,22 @@ export const PublicFood = () => {
     const [sortOrder, setSortOrder] = useState('asc')
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
+    const [selectedCalories, setSelectedCalories] = useState([]);
+    const caloriesOptions = [
+        { id: 1, calory: { min: 0, max: 200 } },
+        { id: 2, calory: { min: 201, max: 500 } },
+        { id: 3, calory: { min: 501, max: 1000 } },
+    ];
+    const handleCheckboxChange = (e) => {
+        const caloryId = parseInt(e.target.value);
+        const selectedCalory = caloriesOptions.find((calory) => calory.id === caloryId);
+
+        if (e.target.checked) {
+            setSelectedCalories((prev) => [...prev, selectedCalory]);
+        } else {
+            setSelectedCalories((prev) => prev.filter((item) => item.id !== caloryId));
+        }
+    };
     const PAGE_SIZE = 5
     async function fetchPubFoods() {
         try {
@@ -29,6 +45,14 @@ export const PublicFood = () => {
             post.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
+        if (selectedCalories.length > 0) {
+            filteredData = filteredData.filter((post) =>
+                selectedCalories.some((calory) =>
+                    post.calory >= calory.calory.min && post.calory <= calory.calory.max
+                )
+            );
+        }
+
         if (sortOrder === 'asc') {
             filteredData.sort((a, b) => a.name.localeCompare(b.name));
         } else if (sortOrder === 'desc') {
@@ -44,7 +68,7 @@ export const PublicFood = () => {
         const paginatedData = filteredData.slice(startIndex, endIndex);
         setFilteredFoods(paginatedData);
 
-    }, [pubPosts, searchTerm, sortOrder, currentPage]);
+    }, [pubPosts, searchTerm, sortOrder, currentPage, selectedCalories]);
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     }
@@ -99,6 +123,25 @@ export const PublicFood = () => {
 
                 </div>
             </nav>
+
+            <div className="container-filter">
+                <label htmlFor="form-check">Filter By Calory</label>
+                <br />
+                {caloriesOptions.map((calory) => (
+                    <div className="form-check" key={calory.id}>
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            value={calory.id}
+                            id={`flexCheck${calory.id}`}
+                            onChange={handleCheckboxChange}
+                        />
+                        <label className="form-check-label" htmlFor={`flexCheck${calory.id}`}>
+                            {`${calory.calory.min}-${calory.calory.max}`}
+                        </label>
+                    </div>
+                ))}
+            </div>
 
             <div className="container-card">
                 {filteredFoods.map((todo) => (
