@@ -21,12 +21,14 @@ router.put(`/profile`, ProfileController.editProfile)
 
 router.get(`/foods`, FoodController.getFoods)
 router.get(`/foods/admin`, guardAuthorizationAdmin, FoodController.getFoods)
+router.get(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.getFood)
 router.post(`/foods/admin`, guardAuthorizationAdmin, FoodController.createFood)
 router.put(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.editFood)
 router.delete(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.destroyFood)
 
-router.post(`/payment/create-session`, PaymentController.getPaymentStripe)
-router.post(`/payment/confirm-payment`, PaymentController.confirmPayment)
+// router.post(`/payment/create-session`, PaymentController.getPaymentStripe)
+// router.post(`/payment/confirm-payment`, PaymentController.confirmPayment)
+router.post(`/create-payment-intent`, PaymentController.confirmPayment)
 
 router.use(errorHandler)
 

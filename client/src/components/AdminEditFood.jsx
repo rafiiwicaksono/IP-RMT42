@@ -45,7 +45,7 @@ export const AdminEditFood = () => {
                     Authorization: `Bearer ${access_token}`
                 }
             }
-            await axios.put(`http://localhost:3000/posts/${id}`, FoodData, config)
+            await axios.put(`http://localhost:3000/foods/admin/${id}`, FoodData, config)
             navigate(`/foods/admin`)
         } catch (error) {
             console.error(error.message);

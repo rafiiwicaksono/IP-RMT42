@@ -19,6 +19,18 @@ class FoodController {
         }
     }
 
+    static async getFood(req, res, next) {
+        try {
+            const food = await Food.findByPk(req.params.id)
+            if (!food) {
+                throw ({ name: `FoodNotFound` })
+            }
+            res.status(200).json(food)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async createFood(req, res, next) {
         try {
             const {name, imageUrl, price, calory} = req.body
