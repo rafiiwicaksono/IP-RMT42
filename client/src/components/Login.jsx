@@ -57,13 +57,13 @@ export const Login = () => {
         <section id="cms-login">
             <div className="pub-button">
                 <Link onClick={handlePublicFood}>
-                    <button type="button" className="btn btn-dark">Calory Choise</button>
+                    <button type="button" className="btn btn-dark">Calorie Choice</button>
                 </Link>
             </div>
             <div className="container-login">
                 <form style={{ width: "23rem" }}>
 
-                    <h3 className="fw-normal mb-3 pb-3" style={{ letterspacing: "1px" }}>Welcome to Calory Choise</h3>
+                    <h3 className="fw-normal mb-3 pb-3" style={{ letterspacing: "1px" }}>Welcome to Calorie Choice</h3>
 
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <div className="form-outline mb-4">
