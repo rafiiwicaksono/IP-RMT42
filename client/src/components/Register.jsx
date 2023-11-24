@@ -44,7 +44,7 @@ export const Register = () => {
                         <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                             <div className="pub-button">
                                 <Link onClick={handlePublicFood}>
-                                    <button type="button" className="btn btn-success">Calory Choise</button>
+                                    <button type="button" className="btn btn-success">Calorie Choice</button>
                                 </Link>
                             </div>
                             <div className="card" style={{ borderradius: "15px" }}>
