@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "./Card";
 import { Navbar } from "./Navbar";
+import { themeContext } from "../context/ThemeContext";
 
 export const Food = () => {
     const [pubPosts, setPubFoods] = useState([])
@@ -76,8 +77,17 @@ export const Food = () => {
         setSortOrder(e.target.value);
     }
 
+    const {currentTheme, theme, setCurrentTheme} = useContext(themeContext)
+    const handleChangeTheme = () => {
+        if (currentTheme === 'light') {
+            setCurrentTheme('dark');
+        } else {
+            setCurrentTheme('light');
+        }
+    };
+
     return (
-        <div>
+        <div className={"container-fluid" + theme[currentTheme].bgColor}>
             <Navbar />
             <section id="public-home">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -88,6 +98,13 @@ export const Food = () => {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <button
+                            type="button"
+                            variant={theme[currentTheme].btnVariant}
+                            onClick={handleChangeTheme}
+                            >
+                                Change Theme - {currentTheme}
+                            </button>
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item dropdown">
                                     <select
