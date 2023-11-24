@@ -18,7 +18,7 @@ export const Navbar = () => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <Link className="navbar-brand mt-2 mt-lg-0" to="/foods">
-                        <h1>Calory Choise</h1>
+                        <h1>Calorie Choice</h1>
                     </Link>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
