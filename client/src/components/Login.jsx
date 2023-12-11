@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios'
+import Swal from "sweetalert2";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -21,11 +22,15 @@ export const Login = () => {
             localStorage.setItem(`access_token`, data.access_token)
             navigate(`/foods`)
         } catch (error) {
-            if (error.response.data) {
-                setError(error.response.data.message)
-            } else {
-                setError(`cari errornya bro, ganbate`)
+            let errorMessage
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
             }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
     }
 
@@ -39,7 +44,15 @@ export const Login = () => {
             localStorage.setItem(`access_token`, data.access_token)
             navigate(`/foods`)
         } catch (error) {
-            console.log(error)
+            let errorMessage
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
       }
     
@@ -65,7 +78,6 @@ export const Login = () => {
 
                     <h3 className="fw-normal mb-3 pb-3" style={{ letterspacing: "1px" }}>Welcome to Calorie Choice</h3>
 
-                    {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="form2Example18">Email</label>
                         <input type="email" id="form2Example18" className="form-control form-control-lg"

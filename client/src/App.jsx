@@ -10,11 +10,9 @@ import { Food } from "./components/Food";
 import { Profile } from "./components/Profile";
 import { EditProfile } from "./components/EditProfile";
 import { Payment } from "./components/Payment";
-import { Success } from "./components/Success";
 import { AdminFood } from "./components/AdminFood";
 import { AdminAddFood } from "./components/AdminAddFood";
 import { AdminEditFood } from "./components/AdminEditFood";
-import ThemeProvider from "./context/ThemeContext";
 
 const router = createBrowserRouter([
   {
@@ -52,9 +50,7 @@ const router = createBrowserRouter([
       return null
     },
     path: "/foods",
-    element: <ThemeProvider>
-      <Food />
-    </ThemeProvider>
+    element: <Food />
   },
   {
     loader: () => {

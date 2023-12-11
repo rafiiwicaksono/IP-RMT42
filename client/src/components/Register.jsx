@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react"
 import axios from "axios"
+import Swal from "sweetalert2";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -24,11 +25,15 @@ export const Register = () => {
             await axios.post('http://localhost:3000/register', userData)
             navigate(`/login`)
         } catch (error) {
-            if (error.response.data) {
-                setError(error.response.data.message)
-            } else {
-                setError(`cari errornya bro, ganbate`)
+            let errorMessage
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
             }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
     }
 
@@ -52,7 +57,6 @@ export const Register = () => {
                                     <h2 className="text-uppercase text-center mb-5">Create an account</h2>
 
                                     <form>
-                                        {error && <div className="alert alert-danger" role="alert">{error}</div>}
                                         <div className="form-outline mb-4">
                                             <label className="form-label" htmlFor="form3Example1cg">Username</label>
                                             <input type="text" id="form3Example1cg" className="form-control form-control-lg" name="username" value={userData.username} onChange={handleInputChange} />

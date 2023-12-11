@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PubCard } from "./PubCard";
+import Swal from "sweetalert2";
 
 export const PublicFood = () => {
     const [allFoods, setAllFoods] = useState([]);
@@ -33,7 +34,15 @@ export const PublicFood = () => {
             setAllFoods(response.data);
             setFilteredFoods(response.data);
         } catch (error) {
-            console.error('Error:', error);
+            let errorMessage
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
     };
 
