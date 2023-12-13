@@ -1,54 +1,79 @@
-import { Link } from "react-router-dom"
-import { Navbar } from "./Navbar"
+import { Link } from "react-router-dom";
+import { Navbar } from "./Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useTheme } from "../context/ThemeContext";
 
 export const AdminFood = () => {
-    const [foods, setFoods] = useState([])
+    const { currentTheme, theme } = useTheme();
+    const [foods, setFoods] = useState([]);
+
     async function fetchFood() {
-        const access_token = localStorage.getItem(`access_token`)
+        const access_token = localStorage.getItem(`access_token`);
         const config = {
             headers: {
-                Authorization: `Bearer ${access_token}`
-            }
-        }
+                Authorization: `Bearer ${access_token}`,
+            },
+        };
+
         try {
-            const response = await axios.get(`http://localhost:3000/foods/admin`, config)
-            setFoods(response.data)
+            const response = await axios.get(`http://localhost:3000/foods/admin`, config);
+            setFoods(response.data);
         } catch (error) {
-            console.log(error.message)
+            let errorMessage;
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
     }
+
     const handleDelete = async (foodId) => {
         const access_token = localStorage.getItem('access_token');
         const config = {
             headers: {
-                Authorization: `Bearer ${access_token}`
+                Authorization: `Bearer ${access_token}`,
             },
-        }
+        };
+
         try {
             await axios.delete(`http://localhost:3000/foods/admin/${foodId}`, config);
             fetchFood();
         } catch (error) {
-            console.error( error.message);
+            let errorMessage;
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
         }
     };
+
     useEffect(() => {
-        fetchFood()
+        fetchFood();
     }, []);
+
     return (
         <div>
             <Navbar />
-            <section id="cms-entitas-utama">
+            <section id="cms-entitas-utama" className={`${theme[currentTheme].bgColor}`}>
                 <div className="create-post">
                     <Link to="/foods/admin/create">
-                        <button type="button" className="btn btn-primary">Create Food</button>
+                        <button type="button" className={`btn btn-primary ${theme[currentTheme].textColor}`}>
+                            Create Food
+                        </button>
                     </Link>
-
                 </div>
 
-                <table className="table caption-top">
-                    <caption>List of foods</caption>
+                <table className={`table caption-top ${theme[currentTheme].textColor} ${theme[currentTheme].tableBgColor}`}>
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -62,30 +87,32 @@ export const AdminFood = () => {
                     <tbody>
                         {foods.map((food, i) => (
                             <tr key={food.id}>
-                            <th scope="row">{++i}</th>
-                            <td>{food.name}</td>
-                            <td>
-                                <img src={food.imageUrl} style={{height:200, width:250}}
-                                    className="card-img-top" alt="..." />
-                            </td>
-                            <td>{food.price}</td>
-                            <td>{food.calory}</td>
-                            <td>
-                                <div className="action-post">
-                                    <Link to={`/foods/admin/${food.id}`}>
-                                        <button type="button" className="btn btn-warning">Edit</button>
-                                    </Link>
-                                    <Link>
-                                        <button type="button" className="btn btn-danger" onClick={() => handleDelete(food.id)}>Delete</button>
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
+                                <th scope="row">{++i}</th>
+                                <td>{food.name}</td>
+                                <td>
+                                    <img src={food.imageUrl} style={{ height: 200, width: 250 }} className="card-img-top" alt="..." />
+                                </td>
+                                <td>{food.price}</td>
+                                <td>{food.calory}</td>
+                                <td>
+                                    <div className="action-post">
+                                        <Link to={`/foods/admin/${food.id}`}>
+                                            <button type="button" className="btn btn-warning">
+                                                Edit
+                                            </button>
+                                        </Link>
+                                        <Link>
+                                            <button type="button" className="btn btn-danger" onClick={() => handleDelete(food.id)}>
+                                                Delete
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </td>
+                            </tr>
                         ))}
-                        
                     </tbody>
                 </table>
             </section>
         </div>
-    )
-}
+    );
+};
