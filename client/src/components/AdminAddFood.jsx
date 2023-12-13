@@ -31,7 +31,7 @@ export const AdminAddFood = () => {
                     Authorization: `Bearer ${access_token}`,
                 },
             };
-            await axios.post("http://localhost:3000/foods/admin", formData, config);
+            await axios.post("https://calorie-choice.blog-website.my.id/foods/admin", formData, config);
             navigate("/foods/admin");
         } catch (error) {
             let errorMessage;

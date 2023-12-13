@@ -33,7 +33,7 @@ export const PublicFood = () => {
 
     const fetchAllFoods = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/pub/foods");
+            const response = await axios.get("https://calorie-choice.blog-website.my.id/pub/foods");
             setAllFoods(response.data);
             setFilteredFoods(response.data);
         } catch (error) {

@@ -18,7 +18,7 @@ export const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const { data } = await axios.post(`http://localhost:3000/login`, form)
+            const { data } = await axios.post(`https://calorie-choice.blog-website.my.id/login`, form)
             localStorage.setItem(`access_token`, data.access_token)
             navigate(`/foods`)
         } catch (error) {
@@ -36,7 +36,7 @@ export const Login = () => {
 
     async function handleCredentialResponse(response) {
         try {
-            let {data} = await axios.post(`http://localhost:3000/google-login`, null, {
+            let {data} = await axios.post(`https://calorie-choice.blog-website.my.id/google-login`, null, {
                 headers: {
                     g_token: response.credential
                 }

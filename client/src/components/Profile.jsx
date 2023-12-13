@@ -17,7 +17,7 @@ export const Profile = () => {
                     Authorization: `Bearer ${access_token}`,
                 },
             };
-            const response = await axios.get("http://localhost:3000/profile", config);
+            const response = await axios.get("https://calorie-choice.blog-website.my.id/profile", config);
             setProfileData(response.data);
         } catch (error) {
             let errorMessage;
