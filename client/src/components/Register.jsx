@@ -22,7 +22,7 @@ export const Register = () => {
 
     const handleCreateUser = async () => {
         try {
-            await axios.post('http://localhost:3000/register', userData)
+            await axios.post('https://calorie-choice.blog-website.my.id/register', userData)
             navigate(`/login`)
         } catch (error) {
             let errorMessage

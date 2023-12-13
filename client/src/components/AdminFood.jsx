@@ -18,7 +18,7 @@ export const AdminFood = () => {
         };
 
         try {
-            const response = await axios.get(`http://localhost:3000/foods/admin`, config);
+            const response = await axios.get(`https://calorie-choice.blog-website.my.id/foods/admin`, config);
             setFoods(response.data);
         } catch (error) {
             let errorMessage;
@@ -42,7 +42,7 @@ export const AdminFood = () => {
         };
 
         try {
-            await axios.delete(`http://localhost:3000/foods/admin/${foodId}`, config);
+            await axios.delete(`https://calorie-choice.blog-website.my.id/foods/admin/${foodId}`, config);
             fetchFood();
         } catch (error) {
             let errorMessage;

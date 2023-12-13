@@ -31,7 +31,7 @@ export const AdminEditFood = () => {
                     Authorization: `Bearer ${access_token}`,
                 },
             };
-            const response = await axios.get(`http://localhost:3000/foods/admin/${id}`, config);
+            const response = await axios.get(`https://calorie-choice.blog-website.my.id/foods/admin/${id}`, config);
             setFoodData(response.data);
         } catch (error) {
             let errorMessage;

@@ -30,7 +30,7 @@ export const EditProfile = () => {
                     Authorization: `Bearer ${access_token}`
                 }
             }
-            const response = await axios.get(`http://localhost:3000/profile`, config);
+            const response = await axios.get(`https://calorie-choice.blog-website.my.id/profile`, config);
             setProfileData(response.data);
         } catch (error) {
             let errorMessage
@@ -57,7 +57,7 @@ export const EditProfile = () => {
                     Authorization: `Bearer ${access_token}`
                 }
             }
-            await axios.put(`http://localhost:3000/profile`, profileData, config)
+            await axios.put(`https://calorie-choice.blog-website.my.id/profile`, profileData, config)
             navigate(`/profile`)
         } catch (error) {
             let errorMessage

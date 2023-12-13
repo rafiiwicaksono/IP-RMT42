@@ -3,8 +3,8 @@
 
 # Calorie Choice API Documentation
 
-Server:
-Client:
+Server: https://calorie-choice.blog-website.my.id/pub/foods
+Client: 
 
 ## Endpoints :
 

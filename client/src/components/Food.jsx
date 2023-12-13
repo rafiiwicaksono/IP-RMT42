@@ -38,7 +38,7 @@ export const Food = () => {
                     Authorization: `Bearer ${access_token}`,
                 },
             };
-            const response = await axios.get("http://localhost:3000/foods", config);
+            const response = await axios.get("https://calorie-choice.blog-website.my.id/foods", config);
             setPubFoods(response.data);
         } catch (error) {
             let errorMessage;
