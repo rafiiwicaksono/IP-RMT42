@@ -472,9 +472,9 @@ OR
 
 &nbsp;
 
-## 8. PUT /posts/:id
+## 11. PUT /foods/admin/:id
 Description:
-- Edit post with access_token
+- Edit food with access_token need authorization admin role
 
 Request:
 
@@ -498,11 +498,10 @@ Request:
 
 ```json
 {
-  "title": "string",
-  "content": "string",
-  "imgUrl": "string",
-  "categoryId": "integer",
-  "authorId": "integer"
+  "name": "string",
+  "imageUrl": "string",
+  "price": "string",
+  "calory": "integer"
 }
 ```
 
@@ -511,11 +510,9 @@ _Response (200 - ok)_
 ```json
 {
   "id": "integer",
-  "title": "string",
-  "content": "integer",
-  "imgUrl": "string",
-  "categoryId": "integer",
-  "authorId": "integer",
+  "imageUrl": "string",
+  "price": "string",
+  "calory": "integer"
 }
 ```
 
@@ -523,31 +520,35 @@ _Response (400 - Bad Request)_
 
 ```json
 {
-  "message": "Title is Required"
+  "message": "Name is Required"
 }
 OR
 {
-  "message": "Content is Required"
+  "message": "Image URL is Required"
 }
 OR
 {
-  "message": "categoryId is Required"
+  "message": "Price is Required"
+}
+OR
+{
+  "message": "Calory is Required"
 }
 ```
 _Response (404 - Not Found)_
 
 ```json
 {
-  "message": "Post not found"
+  "message": "Food not found"
 }
 ```
 
 &nbsp;
 
-## 9. DELETE /posts/:id
+## 12. DELETE /foods/admin/:id
 
 Description:
-- Delete post by id
+- Delete post by id need authorization admin role
 
 Request:
 
@@ -571,7 +572,7 @@ _Response (200 - OK)_
 
 ```json
 {
-  "message": "titlepost success to deleted"
+  "message": "name food success to delete"
 }
 ```
 
@@ -579,147 +580,10 @@ _Response (404 - Not Found)_
 
 ```json
 {
-  "message": "Post not found"
-}
-```
-&nbsp;
-
-## 10. PATCH /posts/:id/image-url
-
-Description:
-- Edit post imgUrl
-
-Request:
-
-- headers:
-
-```json
-{
-  "Authorization": "Bearer <token>"
+  "message": "Food not found"
 }
 ```
 
-- params:
-
-```json
-{
-  "id": "integer (required)"
-}
-```
-
-_Response (200 - OK)_
-
-```json
-{
-  "message": "Image post_title success to update"
-}
-```
-
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Post not found"
-}
-```
-
-
-
-
-
-
-&nbsp;
-
-## 13. GET /categories/:id
-
-Description:
-- Get detail category from database
-
-Request:
-
-- headers: 
-
-```json
-{
-  "Authorization": "Bearer <token>"
-}
-```
-- params: 
-
-```json
-{
-  "id": "integer"
-}
-```
-
-_Response (200 - OK)_
-
-```json
-[
-  {
-        "id": 1,
-        "name": "anime",
-        "createdAt": "2023-11-01T11:11:58.997Z",
-        "updatedAt": "2023-11-01T11:11:58.997Z"
-    }
-]
-```
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Category not found"
-}
-```
-
-&nbsp;
-
-## 14. DELETE /categories/:id
-
-Description:
-- Delete category by id
-
-Request:
-
-- headers:
-
-```json
-{
-  "Authorization": "Bearer <token>"
-}
-```
-
-- params:
-
-```json
-{
-  "id": "integer (required)"
-}
-```
-
-_Response (200 - OK)_
-
-```json
-{
-  "message": "category_name success to delete"
-}
-```
-
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Category not found"
-}
-```
-
-_Response (404 - Not Found)_
-
-```json
-{
-  "message": "Post not found"
-}
-```
 
 &nbsp;
 

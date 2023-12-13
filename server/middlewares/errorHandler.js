@@ -20,7 +20,7 @@ function errorHandler(error, req, res, next) {
     } else if (error.name === `UserNotFound`) {
         res.status(401).json({ message: `Invalid email/password` })
     } else if (error.name === `FoodNotFound`) {
-        res.status(404).json({ message: `food not found` })
+        res.status(404).json({ message: `Food not found` })
     } else if (error.name === `ProfileNotFound`) {
         res.status(404).json({ message: `Profile not found` })
     } else {
