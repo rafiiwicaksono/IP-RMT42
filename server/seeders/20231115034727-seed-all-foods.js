@@ -1,7 +1,7 @@
 'use strict';
 require(`dotenv`).config()
 const axios = require('axios');
-const apiKey = process.env.API_KEY_SPOONACULAR
+const apiKey = `f9e05fcdd4834e8cab388f3dfec30883`
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
