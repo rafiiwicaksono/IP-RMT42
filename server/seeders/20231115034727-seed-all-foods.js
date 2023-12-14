@@ -23,11 +23,11 @@ module.exports = {
         updatedAt: new Date()
       };
     }));
-    await queryInterface.bulkInsert(`Foods`, recipes)
+    await queryInterface.bulkInsert(`Food`, recipes)
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete(`Foods`, null, {
+    await queryInterface.bulkDelete(`Food`, null, {
       truncate: true,
       restartIdentity: true
     })

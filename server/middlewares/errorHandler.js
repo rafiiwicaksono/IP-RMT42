@@ -26,7 +26,7 @@ function errorHandler(error, req, res, next) {
     } else if (error.name === `OrderNotFound`) {
         res.status(404).json({ message: `Order not found` })
     } else {
-        console.log(error)
+        console.log(`${error} <<<<<< ERROR 500`)
         res.status(500).json({ message: `Internal Server Error` })
     }
 }

@@ -20,7 +20,7 @@ beforeAll(async () => {
     await User.create(user1)
 })
 
-describe.skip(`/register`, () => {
+describe(`/register`, () => {
     test(`success add new user (201)`, async () => {
         let {status, body} = await request(app)
             .post(`/register`)
@@ -112,7 +112,7 @@ describe.skip(`/register`, () => {
         expect(body.message).toContain("Password is Required")
     })
 
-    test(`failed registered with duplicate email (409)`, async () => {
+    test(`failed registered with duplicate email (400)`, async () => {
         let {status, body} = await request(app)
             .post(`/register`)
             .send({
@@ -120,7 +120,7 @@ describe.skip(`/register`, () => {
                 email: `user@gmail.com`,
                 password: `halo123`,
             })
-        expect(status).toBe(409)
+        expect(status).toBe(400)
         expect(body).toBeInstanceOf(Object)
         expect(body).toHaveProperty("message", expect.any(Array))
         expect(body.message).toContain("Email is already registered")

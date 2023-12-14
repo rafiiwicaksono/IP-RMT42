@@ -18,7 +18,7 @@ beforeAll(async () => {
     await User.create(user1)
 })
 
-describe.skip(`/login`, () => {
+describe(`/login`, () => {
     test(`success login and get access_token (200)`, async () => {
         let {status, body} = await request(app)
             .post(`/login`)
