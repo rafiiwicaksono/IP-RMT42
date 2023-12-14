@@ -21,6 +21,9 @@ router.get(`/profile`, ProfileController.getProfile)
 router.put(`/profile`, ProfileController.editProfile)
 
 router.post(`/payment/midtrans/token/:id`, PaymentController.getMidtransToken)
+router.get(`/payment/transactions`, PaymentController.getTransactions)
+router.put(`/payment/transactions/:id`, PaymentController.changeStatusPayment)
+router.delete(`/payment/transactions/:id`, PaymentController.cancelPayment)
 
 router.get(`/foods`, FoodController.getFoods)
 router.get(`/foods/admin`, guardAuthorizationAdmin, FoodController.getFoods)

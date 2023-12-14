@@ -36,6 +36,9 @@ export const Navbar = () => {
                             <Link className={`nav-link ${theme[currentTheme].textColor}`} to="/profile">Profile</Link>
                         </li>
                         <li className="nav-item">
+                            <Link className={`nav-link ${theme[currentTheme].textColor}`} to="/transaction">Transaction</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link className={`nav-link ${theme[currentTheme].textColor}`} to="/foods/admin">Admin Access</Link>
                         </li>
                         <li className="nav-item">
@@ -43,7 +46,7 @@ export const Navbar = () => {
                                 Logout
                             </button>
                         </li>
-                        <li className="nav-item" style={{marginLeft: '730px'}}>
+                        <li className="nav-item" style={{marginLeft: '657px'}}>
                             <button
                                 type="button"
                                 className={`btn btn-${theme[currentTheme].btnVariant} ${theme[currentTheme].textColor}`}
