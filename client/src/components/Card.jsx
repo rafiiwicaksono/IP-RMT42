@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -12,7 +11,7 @@ export const Card = ({ todo }) => {
                     Authorization: `Bearer ${access_token}`
                 }
             }
-            const response = await axios.post('https://calorie-choice.blog-website.my.id/payment/midtrans/token', {}, config);
+            const response = await axios.post(`https://calorie-choice.blog-website.my.id/payment/midtrans/token/${todo.id}`, {}, config);
             window.snap.pay(response.data.token);
         } catch (error) {
             let errorMessage;
@@ -34,9 +33,7 @@ export const Card = ({ todo }) => {
                 <h5 className="card-title">{todo.name}</h5>
                 <p className="card-text">Price : Rp {todo.price}00</p>
                 <p className="card-text">Calory : {todo.calory} Cal</p>
-                {/* <Link to={`/payment/${todo.id}`}> */}
-                    <button className="btn btn-primary" onClick={handlePayment}>Buy</button>
-                {/* </Link> */}
+                <button className="btn btn-primary" onClick={handlePayment}>Buy</button>
             </div>
         </div>
     )

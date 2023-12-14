@@ -13,7 +13,7 @@ class PaymentController {
             })
             const lastId = lastOrder ? lastOrder.id + 1 : 1
 
-            const foodId = await Food.findByPk(11)
+            const foodId = await Food.findByPk(req.params.id)
 
             const order = await Order.create({
                 orderId: `CC-${Date.now()}${lastId}`,
