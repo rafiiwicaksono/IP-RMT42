@@ -9,7 +9,7 @@ import { Register } from "./components/Register";
 import { Food } from "./components/Food";
 import { Profile } from "./components/Profile";
 import { EditProfile } from "./components/EditProfile";
-import { Payment } from "./components/Payment";
+import { Transaction } from "./components/Transaction";
 import { AdminFood } from "./components/AdminFood";
 import { AdminAddFood } from "./components/AdminAddFood";
 import { AdminEditFood } from "./components/AdminEditFood";
@@ -115,8 +115,8 @@ const router = createBrowserRouter([
       }
       return null
     },
-    path: "/payment/:id",
-    element: <Payment />
+    path: "/transaction",
+    element: <Transaction />
   },
 ]);
 

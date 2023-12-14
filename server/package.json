@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx nodemon bin/www",
     "start": "node bin/www",
-    "test": "npx jest --detectOpenHandles --runInBand"
+    "test": "npx jest --verbose --detectOpenHandles --runInBand --coverage --forceExit"
   },
   "keywords": [],
   "author": "",

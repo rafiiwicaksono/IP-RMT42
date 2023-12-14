@@ -12,7 +12,7 @@ function errorHandler(error, req, res, next) {
         let errors = error.errors.map((isi) => {
             return isi.message
         })
-        res.status(409).json({ message: errors })
+        res.status(400).json({ message: errors })
     } else if (error.name === `loginEmailNotFill`) {
         res.status(400).json({ message: `email must be fill` })
     } else if (error.name === `loginPasswordNotFill`) {
@@ -23,8 +23,10 @@ function errorHandler(error, req, res, next) {
         res.status(404).json({ message: `Food not found` })
     } else if (error.name === `ProfileNotFound`) {
         res.status(404).json({ message: `Profile not found` })
+    } else if (error.name === `OrderNotFound`) {
+        res.status(404).json({ message: `Order not found` })
     } else {
-        console.log(error)
+        console.log(`${error} <<<<<< ERROR 500`)
         res.status(500).json({ message: `Internal Server Error` })
     }
 }

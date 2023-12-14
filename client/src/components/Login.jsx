@@ -14,7 +14,6 @@ export const Login = () => {
         password: ``
     })
 
-    const [error, setError] = useState("")
 
     const handleLogin = async () => {
         try {
