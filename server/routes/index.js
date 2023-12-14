@@ -20,7 +20,7 @@ router.use(authentication)
 router.get(`/profile`, ProfileController.getProfile)
 router.put(`/profile`, ProfileController.editProfile)
 
-router.post(`/payment/midtrans/token`, PaymentController.getMidtransToken)
+router.post(`/payment/midtrans/token/:id`, PaymentController.getMidtransToken)
 
 router.get(`/foods`, FoodController.getFoods)
 router.get(`/foods/admin`, guardAuthorizationAdmin, FoodController.getFoods)
