@@ -27,7 +27,7 @@ export function fetchTransaction() {
                 },
             };
             const response = await axios.get(`https://calorie-choice.blog-website.my.id/payment/transactions`, config);
-            dispatch(fetchTransactionSuccess)
+            dispatch(fetchTransactionSuccess(response.data))
         } catch (error) {
             let errorMessage;
             if (error.response && error.response.data && error.response.data.message) {
