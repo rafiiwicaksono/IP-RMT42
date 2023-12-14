@@ -5,6 +5,8 @@ import { PubCard } from "./PubCard";
 import Swal from "sweetalert2";
 import { useTheme } from "../context/ThemeContext";
 import { BiSun, BiMoon } from "react-icons/bi";
+import { fetchPubFoodsData } from "../features/appSlice";
+import {useDispatch, useSelector} from "react-redux"
 
 export const PublicFood = () => {
     const { currentTheme, theme, setCurrentTheme } = useTheme();
@@ -48,9 +50,12 @@ export const PublicFood = () => {
             });
         }
     };
+    // const {allFoods} = useSelector((state) => state.appReducer)
+    // const dispatch = useDispatch()
 
     useEffect(() => {
         fetchAllFoods();
+        // dispatch(fetchPubFoodsData())
     }, []);
 
     useEffect(() => {
@@ -74,6 +79,7 @@ export const PublicFood = () => {
 
         setFilteredFoods(filteredData);
     }, [allFoods, searchTerm, sortOrder, selectedCalories]);
+    
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -190,4 +196,3 @@ export const PublicFood = () => {
         </div>
     );
 };
-
