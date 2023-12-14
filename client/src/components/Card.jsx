@@ -12,7 +12,7 @@ export const Card = ({ todo }) => {
                     Authorization: `Bearer ${access_token}`
                 }
             }
-            const response = await axios.post('http://localhost:3000/payment/midtrans/token', {}, config);
+            const response = await axios.post('https://calorie-choice.blog-website.my.id/payment/midtrans/token', {}, config);
             window.snap.pay(response.data.token);
         } catch (error) {
             let errorMessage;
