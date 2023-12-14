@@ -3,36 +3,18 @@ import { Navbar } from "./Navbar";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
+import { useDispatch, useSelector } from "react-redux"
+import { fetchTransaction } from "../features/appSlice";
 
 export const Transaction = () => {
   const { currentTheme, theme } = useTheme();
-  const [data, setData] = useState([]);
 
-  async function fetchData() {
-    try {
-      const access_token = localStorage.getItem(`access_token`);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      };
-      const response = await axios.get(`https://calorie-choice.blog-website.my.id/payment/transactions`, config);
-      setData(response.data);
-    } catch (error) {
-      let errorMessage;
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: errorMessage,
-      });
-    }
-  }
+  const {data} = useSelector((state) => state.appReducer)
+  const dispatch = useDispatch()
+  
 
   useEffect(() => {
-    fetchData()
+    dispatch(fetchTransaction())
   }, [])
 
   const handleDelete = async (OrderId) => {

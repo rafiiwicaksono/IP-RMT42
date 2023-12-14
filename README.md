@@ -13,11 +13,17 @@ List of available endpoints:
 - `POST /login`
 - `POST /google-login`
 - `GET /pub/foods`
+- `POST /payment/midtrans/notifications`
   
 Routes below need authentication:
 - `GET /profile`
 - `PUT /profile`
 - `GET /foods`
+- `POST /payment/midtrans/token/:id`
+- `GET /payment/transactions`
+- `PUT /payment/transactions/:id`
+- `DELETE /payment/transactions/:id`
+
   
 Routes below need authentication & authorization:
 - `GET /foods/admin`
@@ -581,6 +587,179 @@ _Response (404 - Not Found)_
 ```json
 {
   "message": "Food not found"
+}
+```
+
+&nbsp;
+
+## 13. GET /payment/transactions
+
+Description:
+- Get all transaction from database
+
+Request:
+
+- headers: 
+
+```json
+{
+  "Authorization": "Bearer <token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  {
+            "id": 1,
+            "orderId": "dewdew12",
+            "totalAmount": 1233,
+            "totalOrder": 1,
+            "FoodId": 2,
+            "UserId": 1,
+            "statusPayment": "pending",
+            "createdAt": "2023-11-17T04:38:24.497Z",
+            "updatedAt": "2023-11-17T04:38:24.497Z",
+            "Food": {
+              "id": 2,
+              "name": "Blackberry Walnut Cookies",
+              "imageUrl": "https://spoonacular.com/recipeImages/635248-312x231.jpg",
+              "price": 641,
+              "calory": 142,
+              "UserId": 1,
+              "createdAt": "2023-11-17T04:38:24.494Z",
+              "updatedAt": "2023-11-17T04:38:24.494Z"
+            },
+            "User": {
+              "id": 1,
+              "username": "dada",
+              "email": "dada@mail.com",
+              "password": "daadw",
+              "role": "admin",
+              "createdAt": "2023-11-17T04:38:24.494Z",
+              "updatedAt": "2023-11-17T04:38:24.494Z"
+            }
+        },
+        {
+            "id": 2,
+            "orderId": "few21",
+            "totalAmount": 3222,
+            "totalOrder": 1,
+            "FoodId": 3,
+            "UserId": 1,
+            "statusPayment": "pending",
+            "createdAt": "2023-11-17T04:38:24.497Z",
+            "updatedAt": "2023-11-17T04:38:24.497Z",
+            "Food": {
+              "id": 3,
+              "name": "Blackberry Walnut Cookies",
+              "imageUrl": "https://spoonacular.com/recipeImages/635248-312x231.jpg",
+              "price": 641,
+              "calory": 142,
+              "UserId": 1,
+              "createdAt": "2023-11-17T04:38:24.494Z",
+              "updatedAt": "2023-11-17T04:38:24.494Z"
+            },
+            "User": {
+              "id": 1,
+              "username": "dada",
+              "email": "dada@mail.com",
+              "password": "daadw",
+              "role": "admin",
+              "createdAt": "2023-11-17T04:38:24.494Z",
+              "updatedAt": "2023-11-17T04:38:24.494Z"
+            }
+        },
+  ...,
+]
+```
+
+&nbsp;
+
+## 14. PUT /payment/transactions/:id
+Description:
+- update statusPayment with access_token
+
+Request:
+
+- headers: 
+
+```json
+{
+  "Authorization": "Bearer <token>"
+}
+```
+- params: 
+
+```json
+{
+  "id": "integer"
+}
+```
+
+- body:
+
+```json
+{
+ "statusPayment": "paid"
+}
+```
+
+_Response (200 - ok)_
+
+```json
+{
+  "statusPayment": "paid"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found"
+}
+```
+
+&nbsp;
+
+## 15. DELETE /payment/transactions/:id
+
+Description:
+- Cancel order by id 
+
+Request:
+
+- headers:
+
+```json
+{
+  "Authorization": "Bearer <token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "order id with orderId success to cancel"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found"
 }
 ```
 

@@ -11,8 +11,6 @@ export const Register = () => {
         password: ''
     });
 
-    const [error, setError] = useState("")
-
     const handleInputChange = (e) => {
         setUserData({
             ...userData,
