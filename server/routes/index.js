@@ -14,10 +14,13 @@ router.post(`/google-login`, UserController.loginGoogle)
 
 router.get(`/pub/foods`, FoodController.getFoodsPub)
 
+router.post(`/payment/midtrans/notifications`, PaymentController.getMidtransNotification)
 
 router.use(authentication)
 router.get(`/profile`, ProfileController.getProfile)
 router.put(`/profile`, ProfileController.editProfile)
+
+router.post(`/payment/midtrans/token`, PaymentController.getMidtransToken)
 
 router.get(`/foods`, FoodController.getFoods)
 router.get(`/foods/admin`, guardAuthorizationAdmin, FoodController.getFoods)
@@ -26,9 +29,8 @@ router.post(`/foods/admin`, guardAuthorizationAdmin, FoodController.createFood)
 router.put(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.editFood)
 router.delete(`/foods/admin/:id`, guardAuthorizationAdmin, FoodController.destroyFood)
 
-// router.post(`/payment/create-session`, PaymentController.getPaymentStripe)
-// router.post(`/payment/confirm-payment`, PaymentController.confirmPayment)
-router.post(`/create-payment-intent`, PaymentController.confirmPayment)
+
+
 
 router.use(errorHandler)
 

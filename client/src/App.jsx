@@ -115,20 +115,9 @@ const router = createBrowserRouter([
       }
       return null
     },
-    path: "/payment",
+    path: "/payment/:id",
     element: <Payment />
   },
-  // {
-  //   loader: () => {
-  //     const access_token = localStorage.getItem(`access_token`)
-  //     if(!access_token) {
-  //       throw redirect(`/login`)
-  //     }
-  //     return null
-  //   },
-  //   path: "/success",
-  //   element: <Success/>
-  // },
 ]);
 
 function App() {
